@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 
 def notify_assigned_user(doc, method):
     """
