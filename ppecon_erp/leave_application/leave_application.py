@@ -3,35 +3,32 @@ from frappe import _
 
 @frappe.whitelist()
 def submit_leave_from_mobile(**kwargs):
-    employee = kwargs.get("employee")
-    leave_type = kwargs.get("leave_type")
-    from_date = kwargs.get("from_date")
-    to_date = kwargs.get("to_date")
-    incharge_replacement = kwargs.get("incharge_replacement")
-    ticket = kwargs.get("ticket") or "No"  # Correct field name!
-    reason = kwargs.get("reason")
 
-    # create Leave Application in draft/open state
+    allowed_values = [
+        "Yes (On Company)",
+        "Yes (On Employee)",
+        "No"
+    ]
+
+    ticket = kwargs.get("ticket")
+    if ticket not in allowed_values:
+        ticket = "No"
+
     doc = frappe.get_doc({
         "doctype": "Leave Application",
-        "employee": employee,
-        "leave_type": leave_type,
-        "from_date": from_date,
-        "to_date": to_date,
-        "incharge_replacement": incharge_replacement,
-        "ticket": ticket,  # fixed here
-        "reason": reason,
-        "status": "Open"  # draft state
+        "employee": kwargs.get("employee"),
+        "leave_type": kwargs.get("leave_type"),
+        "from_date": kwargs.get("from_date"),
+        "to_date": kwargs.get("to_date"),
+        "incharge_replacement": kwargs.get("incharge_replacement"),
+        "ticket": ticket,
+        "reason": kwargs.get("reason")
     })
-    doc.insert(ignore_permissions=True)
 
-    # workflow info
-    workflow_state = getattr(doc, "workflow_state", "Open")
-    actions = getattr(doc, "get_workflow_actions", lambda: [])()
+    doc.insert(ignore_permissions=True)
 
     return {
         "message": "Leave Application created successfully",
         "name": doc.name,
-        "workflow_state": workflow_state,
-        "available_actions": actions
+        "workflow_state": getattr(doc, "workflow_state", "Open")
     }
