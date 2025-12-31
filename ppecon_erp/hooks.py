@@ -139,11 +139,9 @@ app_license = "mit"
 # ---------------
 doc_events = {
     "ToDo": {
-        "after_insert": "ppecon_erp.todo.todo.notify_assigned_user",
         "on_update": "ppecon_erp.todo.todo.notify_assigned_user"
     }
 }
-
 # Hook on document methods and events
 # """ doc_events = {
 #     "Sales Order": {
