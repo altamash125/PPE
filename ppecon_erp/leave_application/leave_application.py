@@ -8,7 +8,7 @@ def submit_leave_from_mobile(**kwargs):
     from_date = kwargs.get("from_date")
     to_date = kwargs.get("to_date")
     incharge_replacement = kwargs.get("incharge_replacement")
-    custom_ticket = kwargs.get("custom_ticket") or "No"  # Correct field name!
+    ticket = kwargs.get("ticket") or "No"  # Correct field name!
     reason = kwargs.get("reason")
 
     # create Leave Application in draft/open state
@@ -19,7 +19,7 @@ def submit_leave_from_mobile(**kwargs):
         "from_date": from_date,
         "to_date": to_date,
         "incharge_replacement": incharge_replacement,
-        "custom_ticket": custom_ticket,  # fixed here
+        "ticket": ticket,  # fixed here
         "reason": reason,
         "status": "Open"  # draft state
     })
