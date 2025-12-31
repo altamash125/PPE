@@ -30,10 +30,10 @@ def submit_leave_from_mobile(**kwargs):
         "description": kwargs.get("description")  
     })
 
-    # 1️⃣ Create Draft (insert the document)
+    # 1️Create Draft (insert the document)
     doc.insert(ignore_permissions=True)
 
-    # 2️⃣ Submit via Workflow
+    # 2️Submit via Workflow
     frappe.model.workflow.apply_workflow(
         doc,
         "Submit"  # Must exactly match the workflow action name
@@ -42,7 +42,7 @@ def submit_leave_from_mobile(**kwargs):
     doc.reload()
 
     return {
-        "message": "Leave Application submitted successfully",
+        "message": "Leave Application Submitted",
         "name": doc.name,
         "workflow_state": doc.workflow_state,
         "description": doc.description  # Optional: return description
