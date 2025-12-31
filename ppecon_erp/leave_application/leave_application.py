@@ -22,7 +22,7 @@ def submit_leave_from_mobile(**kwargs):
         "to_date": kwargs.get("to_date"),
         "incharge_replacement": kwargs.get("incharge_replacement"),
         "ticket": ticket,
-        "reason": kwargs.get("reason")
+        "description": kwargs.get("description")
     })
 
     # 1️⃣ Create Draft
