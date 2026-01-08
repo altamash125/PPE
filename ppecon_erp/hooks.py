@@ -140,9 +140,6 @@ app_license = "mit"
 doc_events = {
     "ToDo": {
         "on_update": "ppecon_erp.todo.todo.notify_assigned_user"
-    },
-    "Material Request": {
-        "on_update": "ppecon_erp.material_request.material_request.update_items"
     }
 }
 
