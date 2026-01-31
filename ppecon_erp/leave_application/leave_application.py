@@ -37,20 +37,22 @@ def submit_leave_from_mobile(**kwargs):
         "leave_approver": leave_approver
     })
 
-    # 1️⃣ Insert (Draft)
+    # 1️⃣ Draft save (UI Save)
     doc.insert(ignore_permissions=True)
 
-    # 2️⃣ Submit document (THIS IS MUST)
-    doc.submit()
+    # 2️⃣ Workflow action ONLY (UI Apply / Submit button)
+    frappe.model.workflow.apply_workflow(
+        doc,
+        "Submit"   # EXACT workflow action name
+    )
 
-    # 3️⃣ Reload for updated fields
     doc.reload()
 
     return {
-        "message": "Leave Application Submitted",
+        "message": "Leave Application Applied (Workflow)",
         "name": doc.name,
-        "docstatus": doc.docstatus,
-        "status": doc.status,
+        "docstatus": doc.docstatus,          # 0
+        "status": doc.status,                # Pending Approval
         "workflow_state": doc.workflow_state,
         "leave_approver": doc.leave_approver
     }
