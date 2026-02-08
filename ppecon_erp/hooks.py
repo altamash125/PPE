@@ -144,14 +144,6 @@ doc_events = {
 }
 
 
-
-# Hook on document methods and events
-# """ doc_events = {
-#     "Sales Order": {
-#         "on_update": "ppecon_erp.sales_order.sales_order.test_message"
-#     }
-# } """
-
 # doc_events = {
 # 	"*": {
 # 		"on_update": "method",
