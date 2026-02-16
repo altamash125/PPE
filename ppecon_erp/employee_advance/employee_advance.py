@@ -36,7 +36,7 @@ def submit_employee_advance_from_mobile(**kwargs):
         "repay_unclaimed_amount_from_salary": int(
             kwargs.get("repay_unclaimed_amount_from_salary", 0)
         ),
-        "exchange_rate": 1,   # 🔥 FIX (MANDATORY)
+        "exchange_rate": 1,   #  FIX (MANDATORY)
         "currency": "SAR"
     })
 
@@ -55,7 +55,7 @@ def submit_employee_advance_from_mobile(**kwargs):
         frappe.log_error(frappe.get_traceback(), "Employee Advance Submit Error")
         frappe.throw(_("Submit failed, check Error Log"))
 
-    frappe.db.commit()  # 🔥 VERY IMPORTANT
+    frappe.db.commit()  #  VERY IMPORTANT
 
     return {
         "success": True,
